@@ -8,8 +8,8 @@ class Shapenet_dataset(Dataset):
         self.list  = liste
 
     def __getitem__(self, index):
-        pcd_gt    = torch.from_numpy(np.asarray(open3d.read_point_cloud("./shapenet/test/complete/"+self.list[index]+".pcd").points)).float()
-        pcd_input = self.resample_pcd(torch.from_numpy(np.asarray(open3d.read_point_cloud("./shapenet/test/partial/"+self.list[index]+".pcd").points)).float(),1024)
+        pcd_gt    = torch.from_numpy(np.asarray(open3d.io.read_point_cloud("./shapenet/test/complete/"+self.list[index]+".pcd").points)).float()
+        pcd_input = self.resample_pcd(torch.from_numpy(np.asarray(open3d.io.read_point_cloud("./shapenet/test/partial/"+self.list[index]+".pcd").points)).float(),1024)
         return (pcd_input,pcd_gt)
 
     def __len__(self):
