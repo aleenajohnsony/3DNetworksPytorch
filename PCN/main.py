@@ -41,43 +41,43 @@ for p in tqdm.tqdm(range(0,epochs)):
          writer.add_scalar('Loss',np.array(lost).mean(), p)
     if(p==100):
         a = a + 1
-        pcd = open3d.io.PointCloud()
+        pcd = open3d.geometry.PointCloud()
         pcd.points = open3d.io.Vector3dVector(fine.data.cpu().numpy()[0]+np.array([1.0,0.0,0.0]))
         pcd.colors = open3d.io.Vector3dVector(np.ones((fine.shape[1],3))* [0.76,0.23,0.14])
 
-        pcd2 = open3d.io.PointCloud()
+        pcd2 = open3d.geometry.PointCloud()
         pcd2.points = open3d.io.Vector3dVector(gt_tensor.data.cpu().numpy()[0]+np.array([-1.0,0.0,0.0]))
         pcd2.colors = open3d.io.Vector3dVector(np.ones((gt_tensor.shape[1],3))* [0.16,0.23,0.14])
 
-        pcd3 = open3d.io.PointCloud()
+        pcd3 = open3d.geometry.PointCloud()
         pcd3.points = open3d.io.Vector3dVector(input_tensor.data.cpu().numpy()[0])
         pcd3.colors = open3d.io.Vector3dVector(np.ones((input_tensor.shape[1],3))* [0.16,0.23,0.14])
         open3d.visualization.draw_geometries([pcd,pcd2,pcd3])
     if(p==180):
         a =  a + 1
-        pcd = open3d.io.PointCloud()
+        pcd = open3d.geometry.PointCloud()
         pcd.points = open3d.io.Vector3dVector(fine.data.cpu().numpy()[0]+np.array([1.0,0.0,0.0]))
         pcd.colors = open3d.io.Vector3dVector(np.ones((fine.shape[1],3))* [0.76,0.23,0.14])
 
-        pcd2 = open3d.PointCloud()
+        pcd2 = open3d.geometry.PointCloud()
         pcd2.points = open3d.io.Vector3dVector(gt_tensor.data.cpu().numpy()[0]+np.array([-1.0,0.0,0.0]))
         pcd2.colors = open3d.io.Vector3dVector(np.ones((gt_tensor.shape[1],3))* [0.16,0.23,0.14])
 
-        pcd3 = open3d.io.PointCloud()
+        pcd3 = open3d.geometry.PointCloud()
         pcd3.points = open3d.io.Vector3dVector(input_tensor.data.cpu().numpy()[0])
         pcd3.colors = open3d.io.Vector3dVector(np.ones((input_tensor.shape[1],3))* [0.16,0.23,0.14])
         open3d.visualization.draw_geometries([pcd,pcd2,pcd3])
     if(p==240):
         a =  a + 1
-        pcd = open3d.io.PointCloud()
+        pcd = open3d.geometry.PointCloud()
         pcd.points = open3d.io.Vector3dVector(fine.data.cpu().numpy()[0]+np.array([1.0,0.0,0.0]))
         pcd.colors = open3d.io.Vector3dVector(np.ones((fine.shape[1],3))* [0.76,0.23,0.14])
 
-        pcd2 = open3d.io.PointCloud()
+        pcd2 = open3d.geometry.PointCloud()
         pcd2.points = open3d.io.Vector3dVector(gt_tensor.data.cpu().numpy()[0]+np.array([-1.0,0.0,0.0]))
         pcd2.colors = open3d.io.Vector3dVector(np.ones((gt_tensor.shape[1],3))* [0.16,0.23,0.14])
 
-        pcd3 = open3d.io.PointCloud()
+        pcd3 = open3d.geometry.PointCloud()
         pcd3.points = open3d.io.Vector3dVector(input_tensor.data.cpu().numpy()[0])
         pcd3.colors = open3d.io.Vector3dVector(np.ones((input_tensor.shape[1],3))* [0.16,0.23,0.14])
         open3d.visualization.draw_geometries([pcd,pcd2,pcd3])
