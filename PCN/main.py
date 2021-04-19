@@ -15,7 +15,7 @@ lr = 1e-6
 optimizer = optim.Adam([{'params': model.parameters(), 'lr': lr}])
 dataset = data_loader.load_data("shapenet")
 my_dataset_loader = torch.utils.data.DataLoader(dataset=dataset,batch_size=1,shuffle=False)
-epochs = 70000
+epochs = 251
 writer = SummaryWriter()
 a = 1
 for p in tqdm.tqdm(range(0,epochs)):
@@ -30,7 +30,7 @@ for p in tqdm.tqdm(range(0,epochs)):
         lost.append(loss.data.item())
         optimizer.step()
 
-    if(p%10000==0 and p!=0):
+    if(p%250==0 and p!=0):
         torch.save(model, "./models/model_"+str(p)+".ckpt")
         model.cuda()
         lr = lr/10
@@ -39,7 +39,7 @@ for p in tqdm.tqdm(range(0,epochs)):
 
     if(p%10==0):
          writer.add_scalar('Loss',np.array(lost).mean(), p)
-    if(p==10000):
+    if(p==100):
         a = a + 1
         pcd = open3d.io.PointCloud()
         pcd.points = open3d.io.Vector3dVector(fine.data.cpu().numpy()[0]+np.array([1.0,0.0,0.0]))
@@ -53,7 +53,7 @@ for p in tqdm.tqdm(range(0,epochs)):
         pcd3.points = open3d.io.Vector3dVector(input_tensor.data.cpu().numpy()[0])
         pcd3.colors = open3d.io.Vector3dVector(np.ones((input_tensor.shape[1],3))* [0.16,0.23,0.14])
         open3d.visualization.draw_geometries([pcd,pcd2,pcd3])
-    if(p==20000):
+    if(p==180):
         a =  a + 1
         pcd = open3d.io.PointCloud()
         pcd.points = open3d.io.Vector3dVector(fine.data.cpu().numpy()[0]+np.array([1.0,0.0,0.0]))
@@ -67,7 +67,7 @@ for p in tqdm.tqdm(range(0,epochs)):
         pcd3.points = open3d.io.Vector3dVector(input_tensor.data.cpu().numpy()[0])
         pcd3.colors = open3d.io.Vector3dVector(np.ones((input_tensor.shape[1],3))* [0.16,0.23,0.14])
         open3d.visualization.draw_geometries([pcd,pcd2,pcd3])
-    if(p==50000):
+    if(p==240):
         a =  a + 1
         pcd = open3d.io.PointCloud()
         pcd.points = open3d.io.Vector3dVector(fine.data.cpu().numpy()[0]+np.array([1.0,0.0,0.0]))
