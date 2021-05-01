@@ -121,13 +121,18 @@ class PCNEMD(nn.Module):
 
     def create_loss(self,coarse,fine,gt,alpha):
         gt_ds = gt[:,:coarse.shape[1],:]
-        loss_coarse = earth_mover_distance(coarse, gt_ds, transpose=False)
-        dist1, dist2 = chamfer_dist(fine, gt)
-        loss_fine = (torch.mean(dist1)) + (torch.mean(dist2))
         
-        loss = loss_coarse + alpha * loss_fine
+        #dist1, dist2 = chamfer_dist(fine, gt)
+      
+        criterion = chamfer_distance.ChamferDistance()
+        dist1, dist2 = criterion(fine, gt)
+        chamfer_loss = torch.mean(dist1) + torch.mean(dist2)
 
-        return loss
+        #loss_fine = (torch.mean(dist1)) + (torch.mean(dist2))
+        
+        #loss = loss_coarse + alpha * loss_fine
+
+        return chamfer_loss
 
 
 
